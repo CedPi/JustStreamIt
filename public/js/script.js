@@ -21,14 +21,20 @@ class Modal {
 
 (function run() {
     const modal = new Modal();
-    const movies = document.getElementsByClassName('movie');
-    for (const movie of movies) {
-        movie.onclick = function () {
-            modal.open();
-        };
-    }
-
     const scrollAmount = 262;
+
+    let elt = document.getElementById('IMDB-best');
+    callApi(elt, 'http://localhost:8000/api/v1/titles/?imdb_score_min=9');
+
+    elt = document.getElementById('Action');
+    callApi(elt, 'http://localhost:8000/api/v1/titles/?genre=Action');
+
+    elt = document.getElementById('Comedy');
+    callApi(elt, 'http://localhost:8000/api/v1/titles/?genre=Comedy');
+
+    elt = document.getElementById('Sci-Fi');
+    callApi(elt, 'http://localhost:8000/api/v1/titles/?genre=Sci-Fi');
+
 
     arrows_left = document.getElementsByClassName('arrow-left');
     for (const al of arrows_left) {
@@ -52,25 +58,60 @@ class Modal {
 
     function scroll(element, amount) {
         scrollBefore = element.scrollLeft
-        // console.log(scrollBefore);
         element.scroll({ top: 0, left: element.scrollLeft + amount, behavior: 'smooth' });
         scrollAfter = 0;
         setTimeout(function () {
             scrollAfter = element.scrollLeft;
-            // console.log(scrollAfter);
-            // console.log(scrollAfter - scrollBefore);
             if ((scrollAfter - scrollBefore) == 0) {
-                if (amount > 0)
-                    console.log("CALL API NEXT !!");
-                else
-                    console.log("CALL API PREV !!");
+                element.scrollLeft = 0;
+                if (amount > 0) {
+                    if (element.dataset.next != 'null')
+                        callApi(element, element.dataset.next);
+                } else {
+                    if (element.dataset.prev != 'null')
+                        callApi(element, element.dataset.prev);
+                }
             }
         }, 400);
     }
 
-    function callApiNext(category, direction) {     // direction = 'previous' | 'next'
-
-    }
+    function callApi(elt, url) {
+        elt.innerHTML = "";
+        const img_loading = document.createElement('img');
+        img_loading.setAttribute('src', 'public/img/loading.gif');
+        img_loading.style.height = '100px';
+        img_loading.style.marginTop = '100px';
+        elt.appendChild(img_loading);
+        fetch(url)
+            .then(function (res) {
+                if (res.ok) {
+                    return res.json();
+                }
+            })
+            .then(function (value) {
+                elt.innerHTML = "";
+                console.log(value);
+                for (const item of value.results) {
+                    let figure = document.createElement('figure');
+                    figure.className = 'movie';
+                    figure.onclick = function () {
+                        modal.open();
+                    };
+                    const figcaption = document.createElement('figcaption');
+                    figcaption.innerText = item.title;
+                    const img = document.createElement('img');
+                    img.setAttribute('src', item.image_url);
+                    figure.appendChild(img);
+                    figure.appendChild(figcaption);
+                    elt.appendChild(figure);
+                }
+                elt.dataset.prev = value.previous;
+                elt.dataset.next = value.next;
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+    };
 })();
 
 

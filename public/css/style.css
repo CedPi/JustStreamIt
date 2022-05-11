@@ -87,6 +87,7 @@ body {
   justify-content: space-between;
   overflow: hidden;
   margin: 10px;
+  height: 322px;
 }
 .category__container figure {
   cursor: pointer;
@@ -97,6 +98,11 @@ body {
 }
 .category__container figcaption {
   color: #fff;
+  width: 182px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
 
 #screen-filter {
