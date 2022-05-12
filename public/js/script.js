@@ -90,7 +90,6 @@ class Modal {
             })
             .then(function (value) {
                 elt.innerHTML = "";
-                console.log(value);
                 for (const item of value.results) {
                     let figure = document.createElement('figure');
                     figure.className = 'movie';

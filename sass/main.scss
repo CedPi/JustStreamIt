@@ -6,14 +6,6 @@ $color-font-shadow: #f00;
 $color-hover: #ccc;
 $padding-modal: 15px;
 
-$breakpoints: (
-    x-large: 1800px,
-    large: 1540px,
-    medium: 1260px,
-    small: 980px,
-    x-small: 700px
-);
-
 @mixin pointer {
     cursor: pointer;
 }
@@ -23,8 +15,8 @@ $breakpoints: (
     margin-bottom: auto;
     width: 0;
     height: 0;
-    border-right: 20px solid transparent;
-    border-left: 20px solid transparent;
+    border-right: 30px solid transparent;
+    border-left: 30px solid transparent;
     border-top: 100px solid transparent;
     border-bottom: 100px solid transparent;
     @include pointer();
@@ -32,12 +24,14 @@ $breakpoints: (
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: $color-primary;
+    background-image: url('../img/background.png');
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .arrow-left {
     @include arrow();
-    border-right: 20px solid $color-tertiary;
+    border-right: 100px solid $color-tertiary;
     margin-left: 0;
 
     &:hover {
@@ -47,7 +41,7 @@ body {
 
 .arrow-right {
     @include arrow();
-    border-left: 20px solid $color-tertiary;
+    border-left: 100px solid $color-tertiary;
     right: 0;
 
     &:hover {
@@ -116,6 +110,11 @@ body {
 
         figure {
             @include pointer();
+            transition: all .2s ease-in-out;
+
+            &:hover {
+                transform: scale(1.1);
+            }
         }
 
         img {
@@ -131,36 +130,6 @@ body {
             text-overflow: ellipsis;
             text-align: center;
         }
-
-        // @media screen and (max-width: map-get($breakpoints, x-large)) {
-        //     figure:nth-child(7) {
-        //         display: none;
-        //     }
-        // }
-
-        // @media screen and (max-width: map-get($breakpoints, large)) {
-        //     figure:nth-child(6) {
-        //         display: none;
-        //     }
-        // }
-
-        // @media screen and (max-width: map-get($breakpoints, medium)) {
-        //     figure:nth-child(5) {
-        //         display: none;
-        //     }
-        // }
-
-        // @media screen and (max-width: map-get($breakpoints, small)) {
-        //     figure:nth-child(4) {
-        //         display: none;
-        //     }
-        // }
-
-        // @media screen and (max-width: map-get($breakpoints, x-small)) {
-        //     figure:nth-child(3) {
-        //         display: none;
-        //     }
-        // }
     }
 }
 
@@ -171,8 +140,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: $color-primary;
-    opacity: 0.93;
+    background-color: $color-secondary;
+    opacity: 0.8;
 }
 
 #modal {
@@ -188,7 +157,7 @@ body {
     background-color: $color-secondary;
     border: 3px solid $color-tertiary;
     border-radius: 20px;
-    box-shadow: 0 0 10px $color-tertiary;
+    box-shadow: 0 0 30px $color-primary;
     padding: $padding-modal;
     color: $color-font;
 
