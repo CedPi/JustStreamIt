@@ -9,18 +9,15 @@
 
 <body>
     <header class="head">
-        <h1 class="head__title">JustStreamIt</h1>
-        <ul class="head__menu">
-            <li><a href="#">Accueil</a></li>
-            <li><a href="#">Catégories</a></li>
-        </ul>
+        <img src="public/img/logo.png" />
     </header>
 
     <div id="container">
         <section class="category">
             <h3 class="category__title">Le meilleur film</h3>
             <div class="category__content category__best">
-                <span class="category__best__title">THE BEST</span>
+                <div class="category__best__img"></div>
+                <div class="category__best__title">THE BEST</div>
             </div>
         </section>
 
@@ -66,9 +63,54 @@
     </div>
     <div id="modal">
         <div>
-            <div>TITRE MODAL</div>
             <div id="modal__btn-close">X</div>
-            <div>CONTENU MODAL</div>
+            <table>
+                <tr>
+                    <td class="info-data" id="title" colspan="3"></td>
+                </tr>
+                <tr>
+                    <td id="img" rowspan="10">IMG</td>
+                </tr>
+                <tr>
+                    <td class="info-title">Genre</td>
+                    <td class="info-data" id="genres"></td>
+                </tr>
+                <tr>
+                    <td class="info-title">Année</td>
+                    <td class="info-data" id="year"></td>
+                </tr>
+                <tr>
+                    <td class="info-title">Evaluation</td>
+                    <td class="info-data" id="rated"></td>
+                </tr>
+                <tr>
+                    <td class="info-title">Score IMDB</td>
+                    <td class="info-data" id="imdb_score"></td>
+                </tr>
+                <tr>
+                    <td class="info-title">Réalisateur(s)</td>
+                    <td class="info-data" id="directors"></td>
+                </tr>
+                <tr>
+                    <td class="info-title">Acteurs</td>
+                    <td class="info-data" id="actors"></td>
+                </tr>
+                <tr>
+                    <td class="info-title">Durée</td>
+                    <td class="info-data" id="duration"></td>
+                </tr>
+                <tr>
+                    <td class="info-title">Pays d'origine</td>
+                    <td class="info-data" id="countries"></td>
+                </tr>
+                <tr>
+                    <td class="info-title">Box-office</td>
+                    <td class="info-data" id="worldwide_gross_income"></td>
+                </tr>
+                <tr>
+                    <td class="info-data" id="long_description" colspan="3"></td>
+                </tr>
+            </table>
         </div>
     </div>
     <script src="public/js/script.js"></script>
